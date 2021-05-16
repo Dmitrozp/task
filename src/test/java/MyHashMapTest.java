@@ -1,6 +1,7 @@
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
+import org.junit.platform.engine.support.hierarchical.Node;
 
 import java.io.IOException;
 
@@ -51,22 +52,15 @@ class MyHashMapTest {
     }
 
     @Test
-    void process_ShouldThrowException_WhenGetValueByKeyEqualsNull() throws IOException {
-        MyHashMap map = new MyHashMap();
-
-        Assertions.assertThrows(Exception.class, () -> map.get(0));
-    }
-
-    @Test
-    void process_ShouldPutKeyAndValueInHashMapWithRightIndex_WhenInputKeyAndValue() throws Exception {
+    void process_ShouldPutKeyAndValueInHashMapWithRightIndex_WhenPutKeyAndValue() throws Exception {
         int key = 20;
         long value = 123L;
         int index = 4;
         MyHashMap map = new MyHashMap();
         map.put(key,value);
 
-        Assertions.assertEquals(20, map.getKey()[index]);
-        Assertions.assertEquals(123L, map.getValue()[index]);
+        Assertions.assertEquals(20, map.getNodes()[index].getKey());
+        Assertions.assertEquals(123L, map.getNodes()[index].getValue());
     }
 
     @Test
@@ -78,8 +72,8 @@ class MyHashMapTest {
         map.put(key,value);
         map.put(36,366L);
 
-        Assertions.assertEquals(36, map.getKey()[index]);
-        Assertions.assertEquals(366L, map.getValue()[index]);
+        Assertions.assertEquals(36, map.getNodes()[index].getKey());
+        Assertions.assertEquals(366L, map.getNodes()[index].getValue());
     }
 
     @Test
@@ -102,13 +96,6 @@ class MyHashMapTest {
         map.put(2093458956,15);
 
         Assertions.assertEquals(32, map.getCapacity());
-    }
-
-    @Test
-    void process_ShouldThrowException_WhenInputKeyEqualsNull() throws IOException {
-        MyHashMap map = new MyHashMap();
-
-        Assertions.assertThrows(Exception.class, () -> map.put(0,123L));
     }
 
     @Test
